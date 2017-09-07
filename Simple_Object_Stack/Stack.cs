@@ -7,38 +7,36 @@ namespace Simple_Object_Stack
     {
         public class Stack
         {
-            private readonly ArrayList _stackList;
+            private readonly ArrayList _stack;
 
             public Stack()
             {
-                _stackList = new ArrayList();
+                _stack = new ArrayList();
             }
 
             public void Push(object obj)
             {
                 if (obj == null)
                     throw new Exception("InvalidOperationException");
-                _stackList.Add(obj);
+                _stack.Add(obj);
             }
 
             public object Pop()
             {
-                var popIndex = _stackList.Count - 1;
+                if (_stack.Count == 0)
+                    throw new Exception("InvalidOperationException");
 
-                if (popIndex >= 0)
-                {
-                    var obj = _stackList[popIndex];
-                    _stackList.RemoveAt(popIndex);
-                    return obj;
-                }
+                var index = _stack.Count - 1;
+                var obj = _stack[index];
+                _stack.RemoveAt(index);
 
-                throw new Exception("InvalidOperationException");
+                return obj;
 
             }
 
             public void Clear()
             {
-                _stackList.Clear();
+                _stack.Clear();
             }
         }
     }
